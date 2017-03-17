@@ -1,0 +1,75 @@
+\documentclass[UTF8,12pt,twoside]{ctexart}
+
+\usepackage{myTemp}
+\lhead{样例模板}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%封面与目录%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+  \begin{center}
+  % Upper part of the page
+  \includegraphics[width=0.25\textwidth]{imgs/logo.jpg}\\[1cm]
+  \textsc{\LARGE Department of Automation}\\[1.5cm]
+  \fangsong{\Large 示例模板}\\[0.5cm]
+  % Title
+  \hrulefill
+  \\[0.8cm]{\centering \LARGE \heiti 文章标题}\\[0.4cm]
+  \hrulefill
+  \\[4cm]
+
+  % Author and supervisor
+  \begin{tabbing}       %tabbing  列表
+    \hspace*{4.6cm} \= \hspace{2.6cm} \= \kill
+    % \=     in tabbing environment, sets a tab stop
+    % \kill  in a\tabbing environment, deletes previous line so tabs can be set without outputting text.
+    % \>     in tabbing environment is a forward tab.
+
+    \>{\fangsong\sihao\textbf {班\hspace{1cm}级 \ \ ：}}\>  {\centering\fangsong\sihao\textbf{~~~~~~~~自~~3~2}} \\
+    \\
+    \>{\fangsong\sihao\textbf {姓\hspace{1cm}名 \ \ ：}}\>  {\centering\fangsong\sihao\textbf{~~~~~~~~陈~昊~楠}}\\
+    \\
+    \>{\fangsong\sihao\textbf {学\hspace{1cm}号 \ \ ：}}\>  {\centering\fangsong\sihao\textbf{~~~~~~2013011449}}\\
+    \\
+    \>{\fangsong\sihao\textbf {指导教师 \ \ ：}}\>  {\centering\fangsong\sihao\textbf{~~~~~~~~~张~~~毅}} \\
+  \end{tabbing}
+  \vfill
+  {\large \today}
+  \end{center}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%正文部分%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[htbp]
+\centering
+\pgfplotstabletypeset[
+	every head row/.style={before row=\hline, after row=\hline},
+	every last row/.style={after row=\hline},
+	every first column/.style={column type/.add={|}{|}},
+	every last column/.style={column type/.add={}{|}},
+	columns/gforce/.style={column name=所加砝码质量(g)},
+	columns/analog/.style={column name=输入通道示数},
+]{data/weight.txt}
+\caption{重力传感器所加砝码质量与输入通道示数}
+\label{tab:weight}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={砝码质量(g)},
+    ylabel={模拟量输出},
+    % legend pos=south east,
+    % legend entries={Concrete,Linoleum},
+    ]
+  \addplot table [x=gforce,y=analog] {data/weight.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{重力传感器输出特性曲线}
+\label{fig:weight}
+\end{figure}
+
+\end{document}
